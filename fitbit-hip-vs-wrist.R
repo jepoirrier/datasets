@@ -1,7 +1,7 @@
 # Fitbit hip vs. wrist - does wearing an activity tracker on the wrist detect more activity than on the hip?
 
-# More description at: [blog post URL]
-# Dataset available at: https://github.com/jepoirrier/datasets/blob/master/170811-fitbit-hips-vs-wrist.ssv
+# More description at: https://jepoirrier.org/2017/08/17/activity-tracker-waist-vs-wrist/
+# Dataset available at: https://github.com/jepoirrier/datasets/blob/master/fitbit-hips-vs-wrist.ssv
 
 library(ggplot2)
 
@@ -18,7 +18,7 @@ steps.plot <- ggplot(data = df, aes(x=Day, y=NSteps, fill=Tracker)) +
   scale_fill_manual(values=c("#000000", "#0000ff"))
 steps.plot
 
-# Delta number of steps, each day, between One and Surge
+# Delta number of steps, each day, between One and Charge
 
 intraDayDiff <- diff(df$NSteps, lag=1, differences = 1)
 intraDayDiff <- append(c(0), intraDayDiff)
@@ -26,8 +26,8 @@ df$intraDayDiff <- intraDayDiff
 df$intraDayDiff[df$Tracker=="One"] <- 0
 df$intraDayDiffPc <- df$intraDayDiff / df$NSteps * 100
 
-stepsIntraDayDiff.plot <- ggplot(data = df[df$Tracker=="Surge",], aes(x=Day, y=intraDayDiffPc)) +
-  labs(title="Relative difference in number of steps (Surge vs. One)", x="Day of July 2017", y="Relative % of steps with Surge vs. One") +
+stepsIntraDayDiff.plot <- ggplot(data = df[df$Tracker=="Charge",], aes(x=Day, y=intraDayDiffPc)) +
+  labs(title="Relative difference in number of steps (Charge vs. One)", x="Day of July 2017", y="Relative % of steps with Charge vs. One") +
   geom_bar(stat="identity", position=position_dodge()) +
   scale_fill_manual(values=c("#0000ff"))
 stepsIntraDayDiff.plot
@@ -52,7 +52,7 @@ stairs.plot <- ggplot(data = df, aes(x=Day, y=NStairs, fill=Tracker)) +
   scale_fill_manual(values=c("#000000", "#0000ff"))
 stairs.plot
 
-# Delta stairs, each day, between One and Surge
+# Delta stairs, each day, between One and Charge
 
 intraDayDiffStairs <- diff(df$NStairs, lag=1, differences = 1)
 intraDayDiffStairs <- append(c(0), intraDayDiffStairs)
@@ -60,8 +60,8 @@ df$intraDayDiffStairs <- intraDayDiffStairs
 df$intraDayDiffStairs[df$Tracker=="One"] <- 0
 df$intraDayDiffStairsPc <- df$intraDayDiffStairs / df$NStairs * 100
 
-stairsIntraDayDiff.plot <- ggplot(data = df[df$Tracker=="Surge",], aes(x=Day, y=intraDayDiffStairsPc)) +
-  labs(title="Relative difference in number of stairs (Surge vs. One)", x="Day of July 2017", y="Relative % of stairs with Surge vs. One") +
+stairsIntraDayDiff.plot <- ggplot(data = df[df$Tracker=="Charge",], aes(x=Day, y=intraDayDiffStairsPc)) +
+  labs(title="Relative difference in number of stairs (Charge vs. One)", x="Day of July 2017", y="Relative % of stairs with Charge vs. One") +
   geom_bar(stat="identity", position=position_dodge()) +
   scale_fill_manual(values=c("#0000ff"))
 stairsIntraDayDiff.plot
